@@ -19,9 +19,11 @@ suppressWarnings(rm(oisst))
 for (j in 1:nrow(moYrs)) {
   myYr <- moYrs[j,2]
   myMo <- moYrs[j,1]
-  # Retrieve monthly SST from NOAA OISST 
+  # Retrieve monthly SST from NOAA OISST
+  # See function script for details. Requires prior download of OISST netcdfs
+  # Change "E:/oisst" to wherever oisst netcdfs are stored
   source("./getoisstMonthly.R")
-  sstagg <- getoisstMonthly(myYr, myMo, myBounds, "E:/oisst")
+  sstagg <- getoisstMonthly(myYr, myMo, myBounds, "E:/oisst") 
   # Now export
   if (exists("oisst")) {
     oisst <- rbind(oisst, sstagg)

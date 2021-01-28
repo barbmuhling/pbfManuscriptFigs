@@ -5,10 +5,12 @@
 
 getoisstMonthly <- function(myYr, myMo, myBounds, myPath) {
   # Month must be 2 characters
+  # Open the correct netcdf. These were downloaded from the website above, and named 
+  # as below. There's one file for each year, as they are large
+  # Domain extracted is 0-60N and 140-250E, which is reflected in the filenames.
   dataPath <- paste0(myPath, "./oisst_060N_140250E_", myYr, ".nc")
   sstFile <- nc_open(dataPath)
   sstLon <- ncvar_get(sstFile, "lon")
-  # sstLon <- ifelse(sstLon > 180, sstLon - 360, sstLon) # Because other vars are in -180 to 180
   sstLat <- ncvar_get(sstFile, "lat")
   sstTime <- ncvar_get(sstFile, "time")
   sstTimDate <- as.Date(as.POSIXct(sstTime*86400, origin = "1800-01-01"))
